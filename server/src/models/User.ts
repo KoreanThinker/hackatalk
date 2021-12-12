@@ -1,38 +1,41 @@
+import {Profile, User} from 'nexus-prisma';
+
 import {NexusGenRootTypes} from '../generated/nexus';
 import {PrismaClient} from '@prisma/client';
 import {assert} from '../utils/assert';
 import {objectType} from 'nexus';
 
-export const Profile = objectType({
+export const ProfileModel = objectType({
   name: 'Profile',
   definition(t) {
-    t.string('socialId');
+    t.field(Profile.socialId);
     t.auth('authType');
-    t.field('user', {type: 'User'});
+    t.field(Profile.user);
   },
 });
 
-export const User = objectType({
-  name: 'User',
+export const UserModel = objectType({
+  name: User.$name,
+  description: User.$description,
   definition(t) {
-    t.nonNull.id('id');
-    t.string('email');
-    t.string('name');
-    t.string('nickname');
-    t.string('thumbURL');
-    t.string('photoURL');
-    t.date('birthday');
-    t.gender('gender');
-    t.string('phone');
-    t.string('statusMessage');
-    t.boolean('verified');
-    t.date('lastSignedIn');
-    t.boolean('isOnline');
-    t.date('createdAt');
-    t.date('updatedAt');
-    t.date('deletedAt');
-    t.field('profile', {type: 'Profile'});
-    t.list.field('notifications', {type: 'Notification'});
+    t.field(User.id);
+    t.field(User.email);
+    t.field(User.name);
+    t.field(User.nickname);
+    t.field(User.thumbURL);
+    t.field(User.photoURL);
+    t.field(User.birthday);
+    t.field(User.gender);
+    t.field(User.phone);
+    t.field(User.statusMessage);
+    t.field(User.verified);
+    t.field(User.lastSignedIn);
+    t.field(User.isOnline);
+    t.field(User.createdAt);
+    t.field(User.updatedAt);
+    t.field(User.deletedAt);
+    t.field(User.profile);
+    t.list.field(User.notifications);
 
     t.boolean('hasBlocked', {
       description:
