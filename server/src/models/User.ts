@@ -1,41 +1,42 @@
-import {Profile, User} from 'nexus-prisma';
+import {Profile as ProfileNexus, User as UserNexus} from 'nexus-prisma';
 
 import {NexusGenRootTypes} from '../generated/nexus';
 import {PrismaClient} from '@prisma/client';
 import {assert} from '../utils/assert';
 import {objectType} from 'nexus';
 
-export const ProfileModel = objectType({
-  name: 'Profile',
+export const Profile = objectType({
+  name: ProfileNexus.$name,
+  description: ProfileNexus.$description,
   definition(t) {
-    t.field(Profile.socialId);
+    t.field(ProfileNexus.socialId);
     t.auth('authType');
-    t.field(Profile.user);
+    t.field(ProfileNexus.user);
   },
 });
 
-export const UserModel = objectType({
-  name: User.$name,
-  description: User.$description,
+export const User = objectType({
+  name: UserNexus.$name,
+  description: UserNexus.$description,
   definition(t) {
-    t.field(User.id);
-    t.field(User.email);
-    t.field(User.name);
-    t.field(User.nickname);
-    t.field(User.thumbURL);
-    t.field(User.photoURL);
-    t.field(User.birthday);
-    t.field(User.gender);
-    t.field(User.phone);
-    t.field(User.statusMessage);
-    t.field(User.verified);
-    t.field(User.lastSignedIn);
-    t.field(User.isOnline);
-    t.field(User.createdAt);
-    t.field(User.updatedAt);
-    t.field(User.deletedAt);
-    t.field(User.profile);
-    t.list.field(User.notifications);
+    t.field(UserNexus.id);
+    t.field(UserNexus.email);
+    t.field(UserNexus.name);
+    t.field(UserNexus.nickname);
+    t.field(UserNexus.thumbURL);
+    t.field(UserNexus.photoURL);
+    t.field(UserNexus.birthday);
+    t.field(UserNexus.gender);
+    t.field(UserNexus.phone);
+    t.field(UserNexus.statusMessage);
+    t.field(UserNexus.verified);
+    t.field(UserNexus.lastSignedIn);
+    t.field(UserNexus.isOnline);
+    t.field(UserNexus.createdAt);
+    t.field(UserNexus.updatedAt);
+    t.field(UserNexus.deletedAt);
+    t.field(UserNexus.profile);
+    t.list.field(UserNexus.notifications);
 
     t.boolean('hasBlocked', {
       description:
